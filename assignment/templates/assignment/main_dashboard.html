@@ -1,0 +1,13 @@
+{% extends 'assignment/base.html' %}
+{% load static %}
+{% load filters %}
+{% load crispy_forms_tags %}
+{% block head %}{% endblock %}
+
+
+{% block content %}
+<div class="course-wrapper">
+    <a class="btn btn-primary" href="{% url 'assignment_app:submit-assignment' cur_user.pk %}" role="button">Integral Equations</a>
+    <a class="btn btn-primary" href="{% url 'assignment_app:submit-assignment' cur_user.pk %}" role="button">Real functions</a>
+</div>
+{% endblock %}

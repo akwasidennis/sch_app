@@ -1,0 +1,90 @@
+{% extends 'assignment/base.html' %}
+{% load static %}
+{% load filters %}
+{% load crispy_forms_tags %}
+{% block head %}{% endblock %}
+
+
+{% block content %}
+        <header style="height: 5vh;">
+            <nav class="navbar navbar-expand-lg navbar-light bg-info">
+                <div style="position: relative; left: 0;">
+                    <a class="navbar-brand ml-4 text-white" id="b__fnt" href="#">KNUST</a> |
+                    <span style="color: white;"> {{ semester.sem|upper }}</span>
+                </div>
+                <div id="p__o" style="position: absolute; right: 0;">
+                    <a href="{% url 'logout' %}"><i class="fa fa-sign-out" aria-hidden="true"></i></a>
+                </div>
+
+                </div>
+            </nav>
+        </header>
+            <main>
+                <div class="all-courses-wrapper">
+                    <!-- semester -->
+                    <div class="row ml-3 mr-3 pt-2">
+                        <div class="col-md-12">
+                            <div class="card">
+                                <div class="card-body h-20">
+                                    <div id="form__wrapper">
+                                        <!-- select semester -->
+                                        <form method='POST' action=".">{% csrf_token %}
+                                            {{ s_form|crispy }}
+                                            <button type="submit" class="btn btn-success">Set</button>
+                                        </form>
+                                        <!-- create course -->
+                                        <hr style="background: black;">
+                                        <form method='POST' action="." class="pt-2 blck">{% csrf_token %}
+                                            <div>{{ c_form|crispy }}</div>
+                                            <div>
+                                                <button type="submit" class="btn btn-success"><i class="fa fa-plus" aria-hidden="true"></i></button>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- ------- -->
+                    
+                    
+                <!-- --------------- -->
+                <!-- <a href="{% url 'assignment_app:create-pdf' %}" class="pr-4">Create Pdf</i></a> -->
+                <div class="scrol-vertically mr-4 ml-4">
+                        
+                        {% for s in a_c %}
+                                <div class="vt-card" style="background-image: linear-gradient(180deg,{{ s.choose_back_color }}, white);" onclick=location.href="{% url 'assignment_app:all-students' s.pk %}";>
+                                    <span id="del__cse"><a href="#"><i class="fa fa-ellipsis-v" aria-hidden="true"></i></a></span>
+                                    
+                                    <div class="std-dialog">
+                                        <a href="{% url 'assignment_app:update-courses' s.pk %}" class="pr-4"><i class="fa fa-pencil" aria-hidden="true"></i></a>
+                                        <a href="{% url 'assignment_app:del-course' s.pk %}"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
+                                    </div>
+
+                                    <div id="del__v">
+                                        {{ s.courses }}
+                                        <hr>
+                                        <div style="font-size: 17px;">
+                                            Number of students 
+                                        </div>
+                                        <div>{% cal_course s.pk %}</div>
+                                    </div>
+                                </div>
+                        {% endfor %}
+                        
+                    </div>
+                
+
+                <!--  -->
+
+        
+                </div>
+      
+            </main>
+
+        <footer class="ft" style="height: 5vh;">
+            <div>
+                &copy All rights reserved
+            </div>
+        </footer>
+{% endblock %}

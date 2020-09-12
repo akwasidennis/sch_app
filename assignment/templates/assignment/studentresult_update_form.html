@@ -1,0 +1,68 @@
+{% extends 'assignment/base.html' %}
+{% load static %}
+{% load filters %}
+{% load crispy_forms_tags %}
+{% block head %}{% endblock %}
+
+
+{% block content %}
+    <div id="h__w1">
+        <div id="h__w">
+            
+            <div class="b">
+                {% if o_c1 %}
+                    <a href="{% url 'assignment_app:all-students' o_c1.selectcourse.pk %}"><i class="fa fa-long-arrow-left" aria-hidden="true"></i></a>
+                {% endif %}
+            </div>
+            <div class="h">
+                <h4>GRADE STUDENT</h4>
+            </div>
+        </div>
+    </div>
+   
+    <div class="main-wrapper1">
+        <div class="students-wrapper">
+            <div class="students-items">
+                {% for s in ass %}
+                    <div class="c-vertical">
+                        <h5 id="q__n">Q number: {{ s.q_number }}</h5>
+                        <div id="f__wrapp">
+                            <div id="p__w">
+                                <a href="{% url 'assignment_app:view-assignment-pdf' s.pk %}" target="_blank"><i class="fa fa-file-pdf-o" aria-hidden="true"></i></a>
+                            </div>
+                            <div>
+                                <h5 class="dt-c">{{ s.date_created }}</h5>
+                            </div>
+                            {% if s.status == 'graded' %}
+                                <div>
+                                    <h5 style="color: green;">{{ s.status }}</h5>
+                                </div>
+                                <div id="ed">
+                                    <a style="color: green;" href="#"><i class="fa fa-check" aria-hidden="true"></i></a>
+                                </div>
+                            {% else %}
+                                <div>
+                                    <h5 style="color: red;">{{ s.status }}</h5>
+                                </div>
+                                <div id="ed">
+                                    <a style="color: red;" href="#"><i class="fa fa-check" aria-hidden="true"></i></a>
+                                </div>
+                            {% endif %}
+                            
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+        <hr style="background-color: honeydew;">
+        <form method="POST" action="." enctype="multipart/form-data" id="f__w">{% csrf_token %}
+                {{ form|crispy }}
+            <div class="form-group" id="b__w">
+                <div>
+                    <button class="btn btn-outline-info" type="submit">Score student</button>
+                </div>
+            </div>
+        </form>
+    </div>
+    
+{% endblock %}

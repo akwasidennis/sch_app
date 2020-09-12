@@ -1,0 +1,97 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <link rel="stylesheet" href="{% static 'assignment/upload.css' %}">  
+    <title>Document</title>
+</head>
+<body>
+    <div class="container">
+        <br>
+        <div class="row bg-dark text-white">
+              <div class="col-sm-12 pt-1 bg-dark text-white">
+                  <form method="post" action="." id="#">
+                      {% csrf_token %}
+                      <div class="form-group files">
+                          <input type="file" class="form-control" multiple="">
+                  </form>
+              </div>
+        </div>
+
+
+
+        <div class="grid-contain">
+            <div class="grid-item-1"></div>
+            <div class="grid-item-2">
+
+            
+            </div>
+            <div class="grid-item-3">
+                
+                     <div id="wrap">
+                         <div class="c-wrapper">
+                             <div class="c-item">
+                                 <div class="cwrapper">
+                                     <h3>Assignment 1</h3>
+                                 </div>
+                             </div>
+                             
+                             <div class="c-item">
+                                 <div class="cwrapper">
+                                     <h3>Assignment 2</h3>
+                                 </div>
+                             </div>
+                             <div class="c-item">
+                                 <div class="cwrapper">
+                                     <h3>Assignment 3</h3>
+                                 </div>
+                             </div>
+                             <div class="c-item">
+                                 <div class="cwrapper">
+                                     <h3>Assignment 4</h3>
+                                 </div>
+                             </div>
+                             <div class="c-item">
+                                 <div class="cwrapper">
+                                     <h3>Assignment 5</h3>
+                                 </div>
+                             </div>
+                             <div class="c-item">
+                                 <div class="cwrapper">
+                                     <h3>Assignment 6</h3>
+                                 </div>
+                             </div>
+                             <div class="c-item">
+                                 <div class="cwrapper">
+                                     <h3>Assignment 7</h3>
+                                 </div>
+                             </div>
+                             <div class="c-item">
+                                 <div class="cwrapper">
+                                     <h3>Assignment 8</h3>
+                                 </div>
+                             </div>
+                             <div class="c-item">
+                                 <div class="cwrapper">
+                                     <h3>Assignment 9</h3>
+                                 </div>
+                             </div>
+                             <div class="c-item">
+                                 <div class="cwrapper">
+                                     <h3>Assignment 10</h3>
+                                 </div>
+                             </div>
+                         </div>
+                     </div>
+            </div>
+        </div> 
+    </div>
+
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+</body>
+</html>

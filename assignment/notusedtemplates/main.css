@@ -1,0 +1,167 @@
+@import url('https://fonts.googleapis.com/css2?family=Alata&family=Do+Hyeon&family=Red+Rose:wght@300;400;700&display=swap');
+:root{
+    --bold-one:'Alata';
+    --bold-two:'Red Rose';
+    --bold-three:'Do Hyeon';
+}
+
+body { 
+    background: -moz-radial-gradient(#364D58,#000);
+    background: -webkit-gradient(radial, center center,10,center center,1000, from(#364D58), to(#000)); 
+    color:#555; 
+    background-color:#151f23; 
+}
+
+.main-wrapper{
+    border: 1px solid #555;
+    border-radius: 4px;
+    box-shadow: 2px 2px 3px 3px #555;
+    max-width:1200px; 
+    margin:40px auto;
+    width: 100%;
+    height: auto;
+    
+}
+
+#wrapper { 
+    width: 100%;
+    height: 70vh;
+    position: relative;
+    white-space:nowrap; 
+    overflow: scroll;
+}
+
+.cwrapper{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.card-wrapper{
+    display: flex;
+    --distance: -5rem;
+    position: absolute;
+    bottom: 5px;
+    margin: 10px;
+    justify-content: center;
+}
+
+
+
+.card{
+    background: linear-gradient(90deg, #330033, rgba(0,0,0,0.8));
+    border-radius: 1rem;
+    padding: 2rem;
+    box-shadow: 4px 4px 15px 2px rgba(0, 0, 0, 0.75);
+    transition: 0.2s;
+    width: 15rem;
+    height: 20rem;
+    position: relative;
+}
+
+.card:not(:first-child){
+    margin-left: var(--distance);
+}
+
+.card:hover,
+.card:focus-within{
+    transform: translateY(-1rem);
+}
+
+.card:hover ~ .card,
+.card:focus-within ~ .card{
+   
+    transform: translateX(calc(var(--distance)*
+    -1));
+   
+}
+
+/* ---------------------------------------- */
+.card .text{
+    height: auto;
+    width: 100%;
+    background-color: white;
+}
+
+
+.card h3{
+    color: #364D58;
+    text-align: center;
+    font-family: var(--bold-one);
+    transition: 0.3s all;
+    text-transform: uppercase;
+    text-decoration: none;
+    display: inline-block;
+}
+
+.card:hover h3{
+    font-family: var(--bold-three);
+    background: -webkit-linear-gradient(-90deg, orange, purple);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    letter-spacing: 2px;
+}
+
+.text-header{
+    text-align: center;
+}
+
+.text-header h2, h3{
+    text-transform: uppercase;
+    font-family: var(--bold-two);
+    color: white;
+}
+
+.image{
+    float: left;
+}
+
+.image img{
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+}
+
+/* s */
+
+.card h3::after{
+    content: '';
+    background: yellow;
+    height: 3px;
+    width: 0;
+    transition: 0.3s;
+    display: block;
+    margin: auto;
+}
+.card:hover h3::after{
+    width: 100%;
+}
+
+/* .image{
+
+    border: 5px solid yellow;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    border-radius: 100px;
+    padding: 5px;
+    width: 80px;
+    height: 80px;
+} */
+
+@media only screen and (max-height:350px){
+    .card-wrapper{
+        display: none;
+    }
+
+    .text-header{
+        z-index: 1;
+    }
+}
+
+@media only screen and (max-height:470px) and (min-height:349px) {
+
+    .text-header{
+        display: none;
+    }
+}

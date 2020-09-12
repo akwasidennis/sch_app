@@ -1,0 +1,40 @@
+.file-input-wrapper {
+    height: 200px;
+    margin: 2px;
+    overflow: hidden;
+    position: relative;
+    width: 500px;
+    background-color: #2f4f4f;
+    cursor: pointer;
+  }
+  
+  .file-input-wrapper>input[type="file"] {
+    font-size: 40px;
+    position: absolute;
+    top: 0;
+    right: 0;
+    opacity: 0;
+    cursor: pointer;
+  }
+  
+  .file-input-wrapper>.btn-file-input {
+    background-color: #494949;
+    border-radius: 4px;
+    color: #fff;
+    display: inline-block;
+    height: 34px;
+    margin: 0 0 0 -1px;
+    padding-left: 0;
+    width: 121px;
+    cursor: pointer;
+  }
+  
+  .file-input-wrapper:hover>.btn-file-input {
+    background-color: #494949;
+  }
+  
+  #img_text {
+    float: right;
+    margin-right: -80px;
+    margin-top: -14px;
+  }

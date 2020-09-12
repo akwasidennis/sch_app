@@ -1,0 +1,69 @@
+{% extends 'assignment/base.html' %}
+{% load static %}
+{% load filters %}
+{% load crispy_forms_tags %}
+{% block head %}{% endblock %}
+
+
+{% block content %}
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-light bg-info">
+            <div style="position: relative; left: 0;">
+                 <a class="navbar-brand ml-4 text-white" id="b__fnt" href="{% url 'assignment_app:student-dashboard' %}">KNUST</a>|
+                <span style="color: white;"> {{ s.sem|upper }}</span>
+            </div>
+            <div id="p__o" style="position: absolute; right: 0;">
+                <a href="{% url 'logout' %}"><i class="fa fa-sign-out" aria-hidden="true"></i></a>
+            </div>
+
+            </div>
+        </nav>
+    </header>
+    <main>
+    <div class="dashboard-wrapper">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-body bg-dark">
+                        <form method="POST" action="." enctype="multipart/form-data" id="f__c">{% csrf_token %}
+                            {{ o_form|crispy }}
+                            <div class="other-std">
+                                <div>
+                                    <button class="btn btn-outline-success" type="submit">Save</button>
+                                </div>
+                                <div>
+                                    <a class="btn btn-danger" href="{% url 'logout' %}" role="button">Cancel</a>                
+                                </div>
+                            </div>
+                        </form>
+    
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <hr style="background: blanchedalmond;">
+        <div class="mt-4">
+            {% for os in o_course %}
+                <div id="dash__click" style="border-left: solid {{ os.selectcourse.choose_back_color }};" class="row h-20 text-dark mt-4" onclick=location.href="{% url 'assignment_app:submit-assignment' os.selectcourse.pk os.pk %}";>
+                    <div class="col-sm-12">
+                        <div class="card">
+                            <div class="card-body" id="deco" style="background-image: linear-gradient(90deg, white, {{ os.selectcourse.choose_back_color }});">
+                                <span class="de-ass" style="background: {{ os.selectcourse.choose_back_color }};" href="#" ><i class="fa fa-trash-o" aria-hidden="true"></i></span>
+                                
+                                <div class="de-dialog p-2">
+                                    This will completely delete any associated activity,
+                                    want to delete?
+                                    <a href="{% url 'assignment_app:del-choose-course' os.pk %}" > Yes</a>
+                                </div>
+                                <div class="f-size" style="font-size: 1.5em; font-weight: 500;">{{ os.choose_course }}</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+
+    </main>
+{% endblock %}

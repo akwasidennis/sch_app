@@ -1,0 +1,86 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'assignment/files.css' %}">    
+    <title>Document</title>
+</head>
+<body>
+
+    <div class="file-input-wrapper">
+        <button class="btn-file-input">SELECT FILES</button>
+        <input type="file" name="image" id="image" value="" />
+      </div>
+
+      <!-- {% for message in get_flashed_messages %}
+        <div class="alert alert-warning">
+            <button type="button" class="close" data-dismiss="alert">&times;</button>
+            {{ message }}
+        </div>
+    {% endfor %} -->
+
+      
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+</body>
+</html>
+
+
+
+<!-- ----------------all-students------- -->
+
+<!-- <div class="wrap-sub-all">
+
+                                    <div class="wrap-sub-all-f">
+                                        <span>{% count_assignment_of_student all_s.pk %}</span>
+                                        <div class="all-students-sub-wrapper">
+                                            <div id="pdf__wrapper">
+                                                <i class="fa fa-file-pdf-o" aria-hidden="true"></i> 
+                                            </div>
+                                            <div id="index__wrapper">{{ all_s.index_number }}</div>
+                                            <div id="date__wrapper">{{ all_s.last_login }}</div>
+                                            {% if all_s.is_authenticated %}
+                                                <div id="is__active" style="color: green;"><a href="{% url 'assignment_app:submit-assignment' all_s.pk %}"><i class="fa fa-eye" aria-hidden="true"></i></a></div>
+                                            {% else %}
+                                                <div id="is__active" style="color: red;"><a href="{% url 'assignment_app:submit-assignment' all_s.pk %}"><i class="fa fa-eye-slash" aria-hidden="true"></i></a></div>
+                                            {% endif %}
+                                            <div id="score__wrapper"><a class="btn btn-primary" href="{% url 'assignment_app:score-student-section' all_s.pk %}" role="button">Score</a></div>
+                                        </div>
+                                    </div>
+                                    
+                                </div> -->
+
+                                <!-- ------------------------ -->
+                                <!-- {% for all_s in all_students %} -->
+                                    <!-- <div class="red-width-bl">
+                                        <span>{% count_assignment_of_student all_s.pk %}</span>
+                                        <div class="red-width">
+                                            <div class="s-img">
+                                                <img src="{{ all_s.userprofile.image.url }}" alt="name">
+                                            </div>
+                                            <div class="is-active">
+                                                <a href="{% url 'assignment_app:submit-assignment' all_s.pk %}"><i class="fa fa-eye" aria-hidden="true"></i></a>
+                                            </div>
+                                            <div class="score">
+                                                <a class="btn btn-primary" href="{% url 'assignment_app:score-student-section' all_s.pk %}" role="button">Score</a>
+                                            </div>
+                                            <div class="l-n">Name</div>
+                                            <div class="l-i">Index</div>
+                                            <div class="l-l">Last login</div>
+                                            <div class="l-d">Date joined</div>
+                
+                                            <div class="cl1">:</div>
+                                            <div class="cl2">:</div>
+                                            <div class="cl3">:</div>
+                                            <div class="cl4">:</div>
+        
+                                            <div class="n">{{ all_s.last_name }} {{ all_s.first_name }}</div>
+                                            <div class="i">{{ all_s.index_number }}</div>
+                                            <div class="l">{{ all_s.last_login }}</div>
+                                            <div class="d">{{ all_s.date_joined }}</div>
+                                        </div>
+                                    </div>-->
+         
+                            
+                        <!-- {% endfor %} -->

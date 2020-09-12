@@ -1,0 +1,76 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <link rel="stylesheet" href="{% static 'assignment/upload.css' %}">    
+    <!------ Include the above in your HEAD tag ---------->
+
+    <title>Document</title>
+</head>
+<body>
+    <!-- <form enctype="multipart/form-data" id="id_ajax_upload_form" method="POST" novalidate="" action=".">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Save</button>
+     </form> -->
+  
+     <!-- --------------------------------------------Drag and Drop file-------------------------------- -->
+  
+    
+      <div class="container">
+          <br>
+          <div class="row bg-dark text-white">
+                <div class="col-md-12 pt-3 bg-dark text-white">
+                    <form method="post" action="." id="#">
+                        {% csrf_token %}
+                        <div class="form-group files">
+                            <input type="file" class="form-control" multiple="">
+                    </form>
+                </div>
+          </div>
+      </div>
+<!-- ----------------------------- -->
+      
+     <!-- ------------------------------------------------------------------------------------------------ -->
+     <!-- <script 
+     src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+     <script type="text/javascript">
+      // form upload
+      $('#id_ajax_upload_form').submit(function(e){
+          e.preventDefault();
+          $form = $(this)
+          var formData = new FormData(this);
+          $.ajax({
+              url: window.location.pathname,
+              type: 'POST',
+              data: formData,
+              success: function (response) {
+                  $('.error').remove();
+                  console.log(response)
+                  if(response.error){
+                      $.each(response.errors, function(name, error){
+                          error = '<small class="text-muted error">' + error + '</small>'
+                          $form.find('[name=' + name + ']').after(error);
+                      })
+                  }
+                  else{
+                      alert(response.message)
+                      window.location = ""
+                  }
+              },
+              cache: false,
+              contentType: false,
+              processData: false
+          });
+      });
+      // end
+     </script> -->
+
+     <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+     <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+</body>
+</html>

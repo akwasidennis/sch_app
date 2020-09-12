@@ -1,0 +1,31 @@
+{% extends 'assignment/base.html' %}
+{% load static %}
+{% load filters %}
+{% load crispy_forms_tags %}
+{% block head %}{% endblock %}
+
+
+{% block content %}
+
+<div class="update-c">
+<div class="row ml-3 mr-3 pt-4">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-body h-20">
+                <div id="form__wrapper">
+                    <!-- create course -->
+                    <form method='POST' action="." class="pt-2 blck">{% csrf_token %}
+                        <div>{{ c_form|crispy }}</div>
+                        <div>
+                            <a class="btn btn-danger" href="{% url 'assignment_app:all-courses' s.pk %}" role="button">Cancel</a>
+                            <button type="submit" class="btn btn-success">Update</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+
+{% endblock %}

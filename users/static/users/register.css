@@ -1,0 +1,193 @@
+@import url('https://fonts.googleapis.com/css2?family=Alata&family=Do+Hyeon&family=Red+Rose:wght@300;400;700&display=swap');
+:root{
+    --bold-one:'Alata';
+    --bold-two:'Red Rose';
+    --bold-three:'Do Hyeon';
+}
+
+body{
+    margin: 0;
+    padding: 0;
+}
+
+.main-wrapper{
+    max-width: 600px;
+    width: 80%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.2);
+    border: 1px solid wheat;
+    margin: 2rem auto;
+}
+
+.main-wrapper1{
+    max-width: 600px;
+    min-width: 420px;
+    width: 80%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.2);
+    border: 1px solid wheat;
+    margin: 2rem auto;
+    padding: 1rem;
+}
+
+.main-wrapper1 #f__w{
+    color: white;
+    font-family: var(--bold-one);
+}
+
+#user__profile{
+    max-width: 635px;
+    margin: 2rem auto;
+}
+
+#user__profile #img__wrapper img{
+    width: 10rem;
+    height: 10rem;
+    border: 1px solid black;
+    border-radius: 50%;
+}
+
+#user__profile #img__wrapper{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-image: linear-gradient(90deg, green, purple);
+}
+
+#user__profile a{
+    font-size: 2em;
+    background: purple;
+    color: white;
+    padding-left: 1rem;
+}
+
+#person__record{
+    max-width: 600px;
+    width: 80%;
+    margin: 1rem auto;
+}
+
+#p__rec{
+    font-weight: 600;
+    font-family: var(--bold-one);
+    display: grid;
+    gap: 1rem;
+    grid-template-columns: 1fr 1fr;
+    grid-template-areas:
+    "ll al"
+    "dj ad";
+}
+
+.last-l{
+    grid-area: ll;
+    color: black;
+}
+.date-j{
+    grid-area: dj;
+    color: black;
+}
+.act-l{
+    grid-area: al;
+    color: green;
+}
+.act-d{
+    grid-area: ad;
+    color: green;
+}
+
+#form__wrap{
+    font-family: var(--bold-one);
+    color: black;
+}
+
+#form__wrap button{
+    margin: auto;
+}
+
+#form__wrap #btn__wrap{
+    display: flex;
+    justify-content: center;
+}
+
+#user__profile h5{
+    text-align: center;
+    font-family: var(--bold-three);
+    background: -webkit-linear-gradient(-90deg, yellow, purple);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    letter-spacing: 2px;
+    font-size: 2em;
+}
+
+#user__profile #t__b{
+    background-image: linear-gradient(-90deg, green, purple);
+}
+
+.main-wrapper1 #f__wrapp{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.2rem 1rem; 
+    color: black;
+    font-family: var(--bold-one);
+}
+
+.main-wrapper1 #f__wrapp #p__w i{
+    font-size: 1.8em;
+    color: red;
+}
+
+.main-wrapper1 #f__wrapp #ed i{
+    font-size: 1.5em;
+}
+
+.main-wrapper1 #f__wrapp h5{
+    font-size: 1em;
+}
+
+.main-wrapper1 #b__w{
+   padding-top: 1.5rem;
+    display: flex;
+    justify-content: center;
+}
+
+#h__w1{
+    max-width: 600px;
+    width: 80%;
+    margin: 1rem auto;  
+}
+#h__w{
+    margin-top: 1rem;
+    display: grid;
+    grid-template-columns: 0.2fr 2fr;
+    align-items: center;
+    grid-template-areas:
+    "b h";
+
+}
+
+.b{
+    grid-area: b;
+}
+
+.h{
+    grid-area: h;
+    text-align: center;
+    font-family: var(--bold-three);
+    background: -webkit-linear-gradient(-90deg, yellow, purple);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    letter-spacing: 2px;
+    font-size: 2em;
+}
+
+
+#h__w i{
+    color: white;
+    font-size: 1.5em;
+    padding: 2rem 0.5rem;
+}
+
+
+
+

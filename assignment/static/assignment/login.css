@@ -1,0 +1,46 @@
+@import url('https://fonts.googleapis.com/css2?family=Alata&family=Do+Hyeon&family=Red+Rose:wght@300;400;700&display=swap');
+:root{
+    --bold-one:'Alata';
+    --bold-two:'Red Rose';
+    --bold-three:'Do Hyeon';
+}
+
+#login__wrapper{
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    display: grid;
+    background-color: burlywood;
+
+    
+}
+#login__wrapper2{
+    position: absolute;
+    width: 300px;
+    /* height: 200px; */
+    z-index: 15;
+    top: 20%;
+    left: 50%;
+    margin: -100px 0 0 -150px;
+    color: black;
+}
+
+#login__wrapper2 #t__c{
+    color: black;
+}
+
+#login__box{
+    background-color: yellowgreen;
+}
+
+.logout-wrapper{
+    border: 1px solid wheat;
+    max-width: 600px;
+    height: 100px;
+    margin: 100px auto;
+    box-shadow: 2px 2px 4px white;
+    text-align: center;
+    font-family: var(--bold-one);
+    color: white;
+}
+

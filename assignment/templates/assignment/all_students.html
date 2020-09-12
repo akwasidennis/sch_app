@@ -1,0 +1,222 @@
+{% extends 'assignment/base.html' %}
+{% load static %}
+{% load filters %}
+{% load crispy_forms_tags %}
+{% block head %}{% endblock %}
+
+
+{% block content %}
+    
+
+    <!-- ---------------------------- -->
+    <div class="all-students-main-wrapper">
+        
+        <header>
+            <nav class="navbar navbar-expand-lg navbar-light bg-info">
+                <a class="navbar-brand ml-4 text-white" id="b__fnt" href="{% url 'assignment_app:all-courses' user.pk %}">{{ sel.courses|upper }}</a><span class="text-white">|</span>
+                <a class="navbar-brand ml-4 text-white" id="r__fnt" href="#">{{ semester.sem|upper }}</a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+                </button>
+            
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item active">
+                    <a class="nav-link" href="#"><span class="sr-only">(current)</span></a>
+                    </li>
+                    
+                </ul>
+                <form class="form-inline my-2 my-lg-0">
+                    <input id="q" name="q" value="{{ request.GET.q }}" class="form-control mr-sm-2" type="search" placeholder="Index number" aria-label="Search">
+                    <button class="btn btn-outline-dark my-2 my-sm-0" type="submit">Search</button>
+                </form>
+                <div id="p__o">
+                    <a href="{% url 'logout' %}"><i class="fa fa-sign-out" aria-hidden="true"></i></a>
+                </div>
+
+                <!-- <div id="l__o">
+                    <li class="nav-item dropdown" id="drop">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown" id="all__elements">
+                            <div class="dropdown-divider"></div>
+                            <li><a class="dropdown-item" href="{% url 'logout' %}"><i class="fa fa-sign-out" aria-hidden="true"></i> Logout</a></li>
+                        </ul>
+                    </li>
+                </div> -->
+                
+                </div>
+            </nav>
+        </header>
+        
+        <main>
+            <div class="container" id="contner">
+                <div class="m-pdf-wrapper">
+                    <div class="c-pdf-wrapper">
+                        <div class="c-s-pdf-wrapper">
+                            {% if u_file.count == 0 %}
+                                <div id="n__fl">No File(s) Uploaded</div> 
+                            {% else %}
+                                {% for u in u_file %}
+                                    <div class="row pt-1 ml-3 mr-3">
+                                        <div class="col-md-12">
+                                            <div class="card bg-light" style="position: relative;">
+                                                <!-- <i class="fa fa-trash-o" aria-hidden="true"></i> -->
+                                                <a class="d-ass" href="#"><i class="fa fa-ellipsis-v" aria-hidden="true"></i></a>
+                                                <!-- ------- -->
+                                                <div class="d-dialog pl-2">
+                                                    <div class="pt-1"><span style="color: orange;">date uploaded:</span> {{ u.date_created }}</div>
+                                                    <div><span style="color: orange;">submission date:</span> {{ u.submission_date }}</div>
+                                                    <div class="rem pb-1"><a href="{% url 'assignment_app:del-upload-file' u.pk %}"><i class="fa fa-trash-o" aria-hidden="true"></i></a></div>
+                                                </div>
+                                                <!-- ------------- -->
+                                                <div class="card-body" id="u__wrapper">
+                                                    <div id="f__name">
+                                                            <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
+                                                            <a href="{% url 'assignment_app:download-file' u.pk %}" target="_new"> <small>{{ u.pdf_file }}</small></a>
+                                                            <!-- descriptions -->
+                                                            {% if u.attach_info %}
+                                                            <hr>
+                                                            <div>
+                                                                <a class="btn btn-primary" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+                                                                    description
+                                                                </a>
+                                                                <div class="collapse" id="collapseExample">
+                                                                    <div class="row">
+                                                                        <div class="col-md-12">
+                                                                            <div class="card">
+                                                                                <div class="card-body">
+                                                                                    <div class="add-info">
+                                                                                        {{ u.attach_info }}
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            {% endif %}
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                {% endfor %}
+                            {% endif %}
+                            <!-- --------- -->
+                        </div>
+                    </div>
+                </div>
+                
+                
+               <div class="set-pdf-wrapper mt-1">
+                    <div class="row pt-4 ml-3 mr-3 mb-2">
+                        <div class="col-md-12">
+                            <div class="card bg-success">
+                                <div class="card-body text-white">
+                                    <form method="POST" action="." enctype="multipart/form-data">{% csrf_token %}
+                                        {{ form|crispy }}
+                                        <button type="submit" class="btn btn-info">Upload</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="all-student-wrapper">
+                    <div class="wrap-all">
+                        <div class="st-particular">
+                            <div class="particular-wrapper">
+                                {% if o_c.count == 0 %}
+                                    <div id="n__std">No Student(s) Registered For This Course</div> 
+                                {% else %}
+                                    {% for all_s in o_c %}
+                                        <div class="pt-card">
+                                            <div class="im-w">
+                                                <img src="{{ all_s.user.userprofile.image.url }}" alt="">
+                                            </div>
+                                            <div class="indx">{{ all_s.user.index_number }}</div>
+                                            <div class="t-st">
+                                                {% if all_s.is_authenticated %}
+                                                    <a style="color: green;" href="{% url 'assignment_app:submit-assignment' all_s.selectcourse.pk all_s.pk %}"><i class="fa fa-eye" aria-hidden="true"></i></a>
+                                                {% else %}
+                                                    <a href="{% url 'assignment_app:submit-assignment' all_s.selectcourse.pk all_s.pk %}"><i class="fa fa-eye" aria-hidden="true"></i></a>
+                                                {% endif %}
+                                            </div>
+                                            <div class="t-sc">
+                                                <a style="color: green;" href="{% url 'assignment_app:score-student-section' all_s.pk %}"><i class="fa fa-file-text" aria-hidden="true"></i></a>
+                                            </div>
+                                        </div>
+                                    {% endfor %}
+                                {% endif %}
+                            </div>
+                        </div>
+                        
+
+
+                        <!-- -------------------- -->
+                        <!--<div class="grid-wrappers">
+                            <div class="grid-wrappers-two">
+                                <div class="ie-h">Integral Equations</div>
+                                <div class="ra-h">Real Analysis</div>
+                                
+                                    
+                               
+                                    
+                                     <div class="ie-wrapper gw">
+                                        <div class="ie-main-wrapper">
+                                            {% for all_s in ie_users %}
+                                                <div class="inc-h">
+                                                    <div class="v-card bg-dark">
+                                                        <div class="ind">{{ all_s.index_number }}</div>
+                                                        <div class="is_l"><a href="{% url 'assignment_app:submit-assignment' all_s.pk %}"><i class="fa fa-eye" aria-hidden="true"></i></a></div>
+                                                        <div class="scre"><a href="{% url 'assignment_app:score-student-section' all_s.pk %}"><i class="fa fa-file-text" aria-hidden="true"></i></a></div>
+                                                    </div>
+                                                </div>
+                                            {% endfor %}
+                                        </div>
+                                    </div>
+                                    
+                              
+                                
+                                    <div class="ra-wrapper gw">
+                                        <div class="ra-main-wrapper">
+                                            {% for all_s in ra_users %}
+                                                <div class="inc1-h">
+                                                    <div class="v-card1 bg-dark">
+                                                        <div class="ind">{{ all_s.index_number }}</div>
+                                                        <div class="is_l"><a href="{% url 'assignment_app:submit-assignment' all_s.pk %}"><i class="fa fa-eye" aria-hidden="true"></i></a></div>
+                                                        <div class="scre"><a href="{% url 'assignment_app:score-student-section' all_s.pk %}"><i class="fa fa-file-text" aria-hidden="true"></i></a></div>
+                                                    </div>
+                                                </div>
+                                            {% endfor %}    
+                                        </div>
+                                    </div> -->
+                               
+                            <!-- </div>
+                        </div> -->
+                            
+                    </div>
+                </div>
+
+            </div>
+        </main>
+
+        <footer class="bg-light text-center">
+            <div id="fter">
+                &copy; All rights reserved
+            </div>
+        </footer>
+        
+    </div>
+    
+    <script>
+        function checkWidth(){
+            let w = document.getElementById('f__name');
+            w.trunk8()
+        }
+
+        checkWidth()
+    </script>
+{% endblock %}

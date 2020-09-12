@@ -1,0 +1,12 @@
+{% extends 'assignment/base.html' %}
+{% load static %}
+{% load filters %}
+{% load crispy_forms_tags %}
+{% block head %}{% endblock %}
+
+
+{% block content %}
+    <div class="dashboard-wrapper">
+        <a href="{% url 'submit-assignment' u.pk %}">Submit assignment</a>
+    </div>
+{% endblock %}

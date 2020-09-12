@@ -1,0 +1,24 @@
+{% extends 'assignment/base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+
+    <!-- <div class="row text-dark">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-body">
+                    <div class="logout"> 
+                        <h3>You have logged out.<a href="{% url 'login' %}" class="ml-2">Log in</a>again?</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div> -->
+
+    <div class="logout-wrapper">
+        <h4>You have logged out.<a href="{% url 'login' %}"> Log in </a>again?</h4>
+    </div>
+    
+
+{% endblock %}

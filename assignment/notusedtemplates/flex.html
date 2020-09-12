@@ -1,0 +1,78 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'assignment/flex.css' %}">    
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <title>Flex</title>
+</head>
+<body>
+   
+    <div class="main-wrapper">
+       
+    <header id="navbar">
+        
+        <div class="menu">
+            <a id="open" href="#" onclick="openMenu()"><i class="fa fa-bars" aria-hidden="true"></i></a>
+            <a id="close" href="#" onclick="closeMenu()"><i class="fa fa-times" aria-hidden="true"></i></a>
+        </div>
+        <nav class="nav__links" id="n_links">
+            <img src="{% static 'assets/images3.jpeg' %}" alt="">
+            <ul>
+                <li><a href="#">Home</a></li>
+                <li><a href="#">Order</a></li>
+                <li><a href="#">Contact</a></li>
+            </ul>
+            <button class="butt">Sign In</button>
+        </nav>
+    </header>
+
+    <main>
+        <div class="wrapper">
+            <form method="POST" action=".">{% csrf_token %}
+                {{ form }}
+                <button type="submit">Send</button>
+            </form>
+            
+        </div>
+    </main>
+    </div> 
+    
+    <script>
+        window.onscroll = function(){
+            myScroll()
+            console.log('Helloo')
+        }
+        let navbar = document.getElementById('navbar');
+        let sticky = navbar.offsetTop;
+
+        let open = document.getElementById("open");
+        let close = document.getElementById("close");
+        let n_l = document.getElementById("n_links");
+
+        function myScroll(){
+            if (window.pageYOffset >= sticky){
+                navbar.classList.add('sticky')
+            }else{
+                navbar.classList.remove('sticky')
+            }
+        }
+
+        function openMenu(){
+            open.style.display = 'none'
+            close.style.display = 'block'
+            n_l.style.display = 'block'
+        }
+
+        function closeMenu(){
+            open.style.display = 'block'
+            close.style.display = 'none'
+            n_l.style.display = 'none'
+        }
+            
+       
+    </script>
+</body>
+</html>

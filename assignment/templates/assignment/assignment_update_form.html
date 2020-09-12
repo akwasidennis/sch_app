@@ -1,0 +1,30 @@
+{% extends 'assignment/base.html' %}
+{% load static %}
+{% load filters %}
+{% load crispy_forms_tags %}
+{% block head %}{% endblock %}
+
+
+{% block content %}
+<div class="register-course">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card bg-dark">
+                <div class="card-body">
+                    <form method="POST" action="." enctype="multipart/form-data" id="f__c">{% csrf_token %}
+                        {{ form|crispy }}
+                        <div class="form-group" id="r__c">
+                            <div>
+                                <button class="btn btn-outline-success" type="submit">Save</button>
+                            </div>
+                            <div>
+                                <a class="btn btn-danger" href="{% url 'assignment_app:all-students' %}" role="button">Cancel</a>                
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

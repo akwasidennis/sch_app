@@ -1,0 +1,150 @@
+body{
+    margin: 0;
+    background: grey;
+}
+
+.main-wrapper{
+    position: relative;
+}
+header{
+    background: black;
+    opacity: 0.8;
+    padding: 5px 20px;
+}
+
+.sticky{
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 0;
+}
+
+.sticky + main{
+    padding-top: 60px;
+}
+
+.nav__links{
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.nav__links img{
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    margin-right: auto;
+}
+
+.nav__links ul li {
+    display: inline-block;
+    padding: 0 20px;
+}
+
+ul, li, a{
+    color: white;
+    list-style-type: none;
+}
+.nav__links ul li a{
+    text-decoration: none;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.4);
+    transition: all 0.3s ease 0s;
+}
+
+.nav__links .butt{
+    border-radius: 10px;
+    background-color: blue;
+    opacity: 0.5;
+    font-size: 20px;
+    padding: 5px;
+    color: white;
+    cursor: pointer;
+    border: 3px solid rgba(255, 255, 255, 0.4);
+    margin-left: 40px;
+    transition: all 0.3s ease 0s;
+}
+
+.nav__links ul li:hover a{
+    color: rgba(255, 255, 255, 1);
+}
+
+.nav__links ul li a:active{
+    color: white;
+}
+
+.nav__links .butt:hover{
+    border: 3px solid rgba(255, 255, 255, 1);
+    color: white;
+}
+
+
+.wrapper{
+    background: green;
+    max-width: 1200px;
+    width: 90%;
+    height: 2000px;
+    margin: auto;
+}
+
+.menu{
+    display: none;
+}
+
+.menu a {
+    font-size: 25px;
+}
+
+main{
+    box-sizing: border-box;
+}
+
+@media (max-width:590px){
+    .sticky + main{
+        padding-top: 225px;
+    }
+
+    .menu {
+        display: flex;
+        justify-content: flex-end;
+    }
+
+    .menu #open{
+        display: none;
+    }
+
+    
+    .nav__links {
+        display: block;
+    }
+    .nav__links ul li {
+        display: block;
+    }
+
+    .nav__links img{
+        margin-left: 50px;
+    }
+
+
+}
+
+@media (min-width:591px){
+    .nav__links{
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+    }
+    
+    .nav__links img{
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        margin-right: auto;
+    }
+    
+    .nav__links ul li {
+        display: inline-block;
+        padding: 0 20px;
+    }
+    
+}

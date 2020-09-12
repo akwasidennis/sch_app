@@ -1,0 +1,299 @@
+{% extends 'assignment/base.html' %}
+{% load static %}
+{% block head %}{% endblock %}
+
+
+{% block content %}
+
+    <div class="content-wrapper">
+            <header>
+                <nav class="navbar navbar-light bg-dark">
+                    {% if user.is_staff %}
+                        <a style="font-size: 40px;" class="navbar-brand text-white" id="c__title" href="#">KNUST</a>
+                    {% else %}
+                        <a style="font-size: 40px;" class="navbar-brand text-white" id="c__title" href="{% url 'assignment_app:student-dashboard' %}"><i class="fa fa-long-arrow-left" aria-hidden="true"></i></a>
+                    {% endif %}
+
+                    <li class="nav-item dropdown" id="drop">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <img src="{{ o_t.user.userprofile.image.url }}" alt="name">
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown" id="elements">
+                          <a class="dropdown-item" href="{% url 'profile' sel.pk o_t.pk %}"><i class="fa fa-user" aria-hidden="true"></i> Profile</a>
+                          {% if user.is_staff %}
+                            <a class="dropdown-item" href="{% url 'assignment_app:all-students' sel.pk %}"><i class="fa fa-users" aria-hidden="true"></i>All Stdts</a>
+                          {% endif %}
+                          <div class="dropdown-divider"></div>
+                          <a class="dropdown-item" href="{% url 'logout' %}"><i class="fa fa-sign-out" aria-hidden="true"></i> Logout</a>
+                        </div>
+                    </li>
+                    
+
+                  </nav>
+            </header>
+
+            <main>
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-md-12 text-center p-2">
+                            <div class="card" style="height: 10rem;">
+                                <div class="card-body" id="card__one">
+                                    <!-- <a href="#"><i class="fa fa-pencil" aria-hidden="true"></i></a> -->
+                                    <h1>{{ sel.courses }}</h1>
+                                    <p>{{ s.sem|upper }}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- ------------------block----------------- -->
+                    <div class="pdf-m-wrapper">
+                        <div class="p-wrapper">
+                            <div class="p-s-wrapper">
+                                {% if u_file.count == 0 %}
+                                    <div id="n__up">Nothing uploaded yet</div>
+                                {% else %}
+                                    {% for f in u_file %}
+                                        <div class="mb-2" style="width: 100%;" id="recent__activity">
+                                            <div>
+                                                <div id="f__name">
+                                                    <a href="{% url 'assignment_app:download-file' f.pk %}" target="_new"><i class="fa fa-file-pdf-o" aria-hidden="true"></i> <small>{{ f.pdf_file }}</small></a>
+                                                </div>
+                                                <div id="date__uploaded">submission date:  {{ f.submission_date }}</div>
+                                                <!-- desc -->
+                                                {% if f.attach_info %}
+                                                    <hr>
+                                                    <div>
+                                                        <a class="btn btn-primary" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+                                                            description
+                                                        </a>
+                                                        <div class="collapse" id="collapseExample">
+                                                            <div class="row">
+                                                                <div class="col-md-12">
+                                                                    <div class="card">
+                                                                        <div class="card-body">
+                                                                            <div class="add-info">
+                                                                                {{ f.attach_info }}
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                {% endif %}
+
+                                            </div>
+                                        </div>
+                                    {% endfor %}    
+                                {% endif %}
+                            </div>
+                        </div>   
+                    </div>
+                    <!-- ----------------------------------------- -->
+
+                    <div class="row">
+                        <div class="col-md-12 text-center p-2 mt-4" id="main__card">
+                            <span>{{ assigncount }}</span>
+                            <div class="card bg-dark" style="height: 20rem; border: 1px solid white;">
+                                {% if assignment.count != 0 %}
+                                    <div class="title pr-3 pt-2 bg-dark text-white">
+                                        <div class="t-pdf">File</div>
+                                        <!-- <div class="t-index">Index</div> -->
+                                        <div class="t-status">Status</div>
+                                        <div class="t-date">Date submitted</div>
+                                        <div class="t-delete pl-2">Remove</div>
+                                    </div>
+                               {% endif %}
+                                <div class="card-body" id="submitted-assgn">
+                                    <div class="card-wrapper">
+                                        <div class="card-items">
+                                            {% if assignment.count == 0 %}
+                                                <div id="n__subm">Nothing submitted</div>
+                                            {% else %}
+                                                {% for assign in assignment %}
+                                                    <div class="c-vertical">
+                                                        <div class="items pr-3">
+                                                            <div class="pdf-img">
+
+                                                                <a href="{% url 'assignment_app:view-assignment-pdf' assign.id %}" target="_new"><i class="fa fa-file-pdf-o" aria-hidden="true"></i> <small>{{ assign.pdf_file|truncatechars:40 }}</small></a>
+                                                                
+                                                            </div>
+                                                            <!-- <div class="i-numb">{{ assign.index }}</div> -->
+                                                            {% if assign.status == 'graded' %}
+                                                                <div class="status" id="h">{{ assign.status }} 
+                                                                    <div>
+                                                                        <!-- <form class="form-inline my-2 my-lg-0">
+                                                                            <input style="height: 0; width: 0;" id="q" name="q" value="{{ assign.q_number }}" class="form-control" type="search">
+                                                                            <button onclick="toBottom()" class="btn btn-outline-dark" type="submit">{{ assign.q_number }}</button>
+                                                                        </form> -->
+
+                                                                        <a href="{% url 'assignment_app:view-result' assign.pk assign.studentothercourse.pk %}"><h5>{{ assign.q_number }}</h5></a>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="d-submitted">{{ assign.date_submitted }}</div>
+                                                                <div class="delete pl-4">
+                                                                    <a href="#"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
+                                                                </div>
+                                                            {% else %}
+                                                                <div class="status">{{ assign.status }} <i class="fa fa-check-circle" aria-hidden="true"></i></div>
+                                                                <div class="d-submitted">{{ assign.date_submitted }}</div>
+                                                                <div class="delete pl-4">
+                                                                    <a href="{% url 'assignment_app:delete-assignment' assign.pk assign.studentothercourse.pk %}"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
+                                                                </div>
+                                                            {% endif %}
+                                                            
+                                                        </div>
+                                                    </div>
+                                                    <!-- ----block----- -->
+                                                    <div class="block-state-wrapper">
+                                                        <div class="block-state">
+                                                            <div class="f">File</div>
+                                                            <div class="i">Index</div>
+                                                            <div class="s">Status</div>
+                                                            <div class="d">Date submitted</div>
+                                                            <div class="r">Remove</div>
+        
+                                                            <div class="c1">:</div>
+                                                            <div class="c2">:</div>
+                                                            <div class="c3">:</div>
+                                                            <div class="c4">:</div>
+                                                            <div class="c5">:</div>
+                                                            
+                                                            <div class="m-f">
+                                                                <a href="{% url 'assignment_app:view-assignment-pdf' assign.id %}" target="_new"><i class="fa fa-file-pdf-o" aria-hidden="true"></i> <small>{{ assign.pdf_file|truncatechars:20 }}</small></a>
+                                                            </div>
+                                                            <div class="m-i">
+                                                                {{ assign.index }}
+                                                            </div>
+                                                            {% if assign.status == 'graded' %}
+                                                                <div class="m-s" style="display: flex;">
+                                                                    <div>{{ assign.status }} <div style="background: rgb(32, 32, 148); padding: 0px; border-radius: 0.5rem; text-align: center;"><h5 style="color: white; font-size: 1em;">{{ assign.q_number }}</h5></div></div>
+                                                                </div>
+                                                            {% else %}
+                                                                <div class="m-s">
+                                                                    <div>{{ assign.status }} <i class="fa fa-check-circle" aria-hidden="true"></i></div>
+                                                                </div>
+                                                            {% endif %} 
+                                                                
+                                                        
+
+                                                            
+                                                            <div class="m-d">
+                                                                {{ assign.date_submitted }}
+                                                            </div>
+                                                            <div class="m-r">
+                                                                <a href="{% url 'assignment_app:delete-assignment' assign.pk assign.studentothercourse.pk %}"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    
+                                                <!-- ---------- -->
+                                                {% endfor %}
+                                            {% endif %}
+                                        </div>
+                                    </div>
+
+                                    
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-12 p-2">
+                            <div class="card" style="height: 20rem;">
+                                <div class="card-body p-2" id="wrapper__two">
+
+                                    <form method="POST" enctype="multipart/form-data">
+                                        {% csrf_token %}
+                                        <div class="form-group files">
+                                            <input type="file" ondragover="highlight(event)" ondragleave="unhighlight(event)" class="form-control text-info" name="file" id="dropzone">
+                                        </div>
+
+                                        <button type="submit" class="btn btn-outline-success mb-1" id="butt">Save changes</button>
+                                        <a class="btn btn-outline-danger mr-2 mb-1" id="can" onclick="cancel()" role="button">Cancel</a>
+                                    </form>
+                                                                
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-12 p-2">
+                            <div class="card" style="height: 28rem; background-color: {{ o_t.selectcourse.choose_back_color }}; opacity: 0.7;">
+                                <small class="text-white ml-4" id="res">Results</small>
+                                <div class="card-body" id="wrapper__three">
+                                    
+                                    <div id="wrap">
+                                        {% if result.count == 0 %}
+                                            <div id="n__disp">No results to display</div>
+                                        {% else %}
+                                            <div class="c-wrapper">
+                                                
+                                                {% for r in result %}
+                                                    <div class="c-item">
+                                                        {% if user.is_staff %}
+                                                            <a href="{% url 'assignment_app:update-grade' r.pk %}"><i class="fa fa-pencil" aria-hidden="true"></i></a>
+                                                        {% endif %}
+
+                                                        <div id="q__num"><span>{{ r.q_number }}</span></div>
+                                                        <div class="cwrapper">
+                                                            <div id="ass">{{ r.title }}</div>
+                                                            <div id="st">status</div>
+                                                            {% if r.status == 'graded' %}
+                                                                <div id="gr"><span style="color: greenyellow;">{{ r.status }}</span></div>
+                                                            {% else %}
+                                                                <div id="gr"><span style="color: red;">{{ r.status }}</span></div>
+                                                            {% endif %}
+
+                                                            {% if r.status == 'graded' %}
+                                                                <div id="mk">marks</div>
+                                                                <div id="sc">
+                                                                    <div id="s">scored</div>
+                                                                    <div id="sn">{{ r.scored }}</div>
+                                                                    <div id="t">total</div>
+                                                                    <div id="tn">{{ r.total }}</div>
+                                                                    <div id="p">perc.</div>
+                                                                    <div id="pn">{{ r.get_percentage|floatformat:"1" }}%</div>
+                                                                </div>
+                                                                <div id="mkr">graded by</div>
+                                                                <div id="nam">{{ r.marker }}</div>
+                                                                <div id="gr__on">graded on</div>
+                                                                <div id="dt">{{ r.date_graded }}</div>
+                                                            {% else %}
+                                                                <div id="mk">marks</div>
+                                                                <div id="sc">
+                                                                    <div id="s">scored</div>
+                                                                    <div id="sn"></div>
+                                                                    <div id="t">total</div>
+                                                                    <div id="tn"></div>
+                                                                    <div id="p">perc.</div>
+                                                                    <div id="pn"></div>
+                                                                </div>
+                                                                <div id="mkr">graded by</div>
+                                                                <div id="nam"></div>
+                                                                <div id="gr__on">graded on</div>
+                                                                <div id="dt"></div>
+                                                            {% endif %}
+                                                            
+                                                        </div>
+                                                    </div>
+                                                {% endfor %}
+                                            </div>
+                                        {% endif %}
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        <footer>&copy; All rights reserved</footer>
+    </div>
+
+<script src="{% static 'assignment/js/hover.js' %}"></script>
+{% endblock %}
